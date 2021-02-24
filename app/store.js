@@ -5,17 +5,14 @@ import thunkMiddleware from 'redux-thunk'
 
 const GOT_PETS_FROM_SERVER = 'GOT_PETS_FROM_SERVER'
 
-
 const gotPets = pets => ({
   type: GOT_PETS_FROM_SERVER,
   pets
 })
 
-export const getPetsThunk = () => async(dispatch, getState) => {
+export const getPetsThunk = () => async(dispatch) => {
   try {
-    const { data } = await axios.get('/http://localhost:3000/pets')
-    console.log("DATA ---> ", data)
-
+    const { data } = await axios.get('/pets')
     dispatch(gotPets(data))
   } catch(error) { next(error) }
 }

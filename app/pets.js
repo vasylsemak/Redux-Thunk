@@ -1,8 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List} from './utils'
+import {getPetsThunk} from './store'
 
 class Pets extends React.Component {
+
+  componentDidMount() {
+    this.props.getPets()
+  }
+
   render () {
     const {pets} = this.props
 
@@ -23,14 +29,12 @@ class Pets extends React.Component {
   }
 }
 
-const mapState = (state) => {
-  return {
-    pets: state.pets
-  }
-}
+const mapState = state => ({
+  pets: state.pets
+})
 
-const mapDispatch = (dispatch) => {
-  // YOUR CODE HERE
-}
+const mapDispatch = dispatch => ({
+  getPets: () => dispatch(getPetsThunk())
+})
 
 export default connect(mapState, mapDispatch)(Pets)
